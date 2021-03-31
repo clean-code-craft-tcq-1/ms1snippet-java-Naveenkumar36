@@ -26,20 +26,20 @@ public class SensorValidatorTest {
         assertFalse(SensorValidator.validateCurrentReadings(currents));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void throwsExceptionForNullInput() {
-        SensorValidator.validateCurrentReadings(null);
+        assertFalse(SensorValidator.validateCurrentReadings(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void throwsExceptionForEmptyInput() {
-        SensorValidator.validateCurrentReadings(Collections.EMPTY_LIST);
+        assertFalse(SensorValidator.validateCurrentReadings(Collections.EMPTY_LIST));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void throwsExceptionForNullInputContents() {
         Double[] readings = {0.03, null, 0.03, 0.33};
         List<Double> currents = Arrays.asList(readings);
-        SensorValidator.validateCurrentReadings(currents);
+        assertFalse(SensorValidator.validateCurrentReadings(currents));
     }
 }

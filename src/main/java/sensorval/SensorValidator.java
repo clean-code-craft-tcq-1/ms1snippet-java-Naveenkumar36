@@ -24,6 +24,9 @@ public class SensorValidator {
           double maxDeltaValue
     )
     {
+        if (Validator.isListOrContentsEmpty(values)) {
+            return false;
+        }
         int lastButOneIndex = values.size() - 1;
         for (int i = 0; i < lastButOneIndex; i++) {
             if (differenceInIndexValueGreaterThanMaxThreshold(values.get(i), values.get(i + 1), maxDeltaValue)) {
@@ -34,18 +37,10 @@ public class SensorValidator {
     }
 
     public static boolean validateSOCReadings(List<Double> values) {
-        throwExceptionForInvalidInput(values);
         return validateReadings(values, MAX_SOC_VALUE);
     }
 
     public static boolean validateCurrentReadings(List<Double> values) {
-        throwExceptionForInvalidInput(values);
         return validateReadings(values, MAX_CURRENT_VALUE);
-    }
-
-    private static void throwExceptionForInvalidInput(List<Double> values) {
-        if (Validator.isListOrContentsEmpty(values)) {
-            throw new IllegalArgumentException("Input list or it's contents cannot be null");
-        }
     }
 }
